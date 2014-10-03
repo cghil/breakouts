@@ -26,5 +26,19 @@ class User < ActiveRecord::Base
     comment.topic = Topic.find(topic_id)
     comment.save
   end
+  def view!
+    topics = Topic.all
+    comments = Comment.all
+    puts "   TOPIC ID   | #{" " * 9} TOPIC #{" " * 9} | VOTE COUNT"
+    topics.each do |topic|
+      puts "#{" " * 5} #{topic.id}  #{" " * 5}| #{topic.title} | #{topic.vote}"
+    end
+    puts " "
+    puts "COMMENTS                                  |  USERNAME"
+    comments.each do |comment|
+      user = User.find_by(:id => comment.user_id)
+      puts "#{comment.description} | #{user.user_name}"
+    end
+  end
 
 end

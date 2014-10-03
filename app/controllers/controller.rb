@@ -26,27 +26,30 @@ module Controller
     if ARGV.length == 0
       View.help
     else
-    @username = ARGV[0]
-    @command = ARGV[1]
-    @input = ARGV[2..-1].join(" ")
-    @last_input = ARGV.last
-    case
-      when @command == "create"
-        user = User.find_by(:user_name => @username)
-        user.add_topic(@input)
-        View.topic_added
-      when @command == "comment"
-        user = User.find_by(:user_name => @username)
-        user.add_comment(@input, @last_input.to_i)
-        View.add_comment
-      when @command == "vote"
-        user = User.find_by(:user_name => @username)
-        user.vote!(@last_input)
-        View.vote
-      when @command == "help"
-        View.help
+      @username = ARGV[0]
+      @command = ARGV[1]
+      @input = ARGV[2..-1].join(" ")
+      @last_input = ARGV.last
+      case
+        when @command == "create"
+          user = User.find_by(:user_name => @username)
+          user.add_topic(@input)
+          View.topic_added
+        when @command == "comment"
+          user = User.find_by(:user_name => @username)
+          user.add_comment(@input, @last_input.to_i)
+          View.add_comment
+        when @command == "vote"
+          user = User.find_by(:user_name => @username)
+          user.vote!(@last_input)
+          View.vote
+        when @command == "help"
+          View.help
+        when @command == "view"
+          user = User.find_by(:user_name => @username)
+          user.view!
+      end
     end
-  end
   end
 end
 
