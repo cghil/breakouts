@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     puts "COMMENTS                                  |  USERNAME"
     comments.each do |comment|
       user = User.find_by(:id => comment.user_id)
-      puts "#{comment.description} | #{user.user_name}"
+      puts "#{comment.description}  |  #{user.user_name}"
     end
   end
 
